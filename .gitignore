@@ -1,0 +1,17 @@
+# Virtual env
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Dados e outputs (locais)
+00_DATA/
+01_OUTPUTS/
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db

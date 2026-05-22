@@ -1,0 +1,46 @@
+name: C:\Users\D0mTu\miniconda3\envs\L_py_R
+channels:
+  - defaults
+dependencies:
+  - pymupdf
+  - scipy
+  - r-reticulate
+  - r-base=4.3
+  - yfinance
+  - scikit-learn
+  - selenium
+  - r-tidyverse
+  - matplotlib
+  - pypdf2
+  - python=3.11
+  - r-irkernel
+  - pandas
+  - statsmodels
+  - seaborn
+  - jupyterlab
+  - numpy
+  - r-essentials
+  - r-readxl
+  - r-cluster
+  - r-survey
+  - r-ggplot2
+  - r-openxlsx
+  - r-patchwork
+  - r-forecast
+  - r-zoo
+  - r-factominer
+  - r-dplyr
+  - r-rio
+  - r-readr
+  - r-factoextra
+  - pyreadstat
+  - prince
+  - openpyxl
+  - xlsxwriter
+  - r-quandl
+  - r-astsa
+  - r-sae
+  - pyarrow
+  - fastparquet
+  - pandas-datareader
+prefix: C:\Users\D0mTu\miniconda3\envs\L_py_R

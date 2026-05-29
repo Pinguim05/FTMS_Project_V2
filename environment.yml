@@ -1,4 +1,4 @@
-name: C:\Users\D0mTu\miniconda3\envs\L_py_R
+name: L_py_R
 channels:
   - defaults
 dependencies:
@@ -43,4 +43,4 @@ dependencies:
   - pyarrow
   - fastparquet
   - pandas-datareader
-prefix: C:\Users\D0mTu\miniconda3\envs\L_py_R
+

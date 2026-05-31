@@ -1,17 +1,39 @@
-# Virtual env
+# Virtual environments
 venv/
+.venv/
 
 # Python cache
 __pycache__/
 *.pyc
-
-# Dados e outputs (locais)
-#00_DATA/
-01_OUTPUTS/
-
-# VS Code
-.vscode/
+*.pyo
 
 # OS
 .DS_Store
 Thumbs.db
+
+# VS Code
+.vscode/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Output files — keep folder structure via .gitkeep, ignore generated content
+outputs/figures/*
+outputs/tables/*
+outputs/data/*
+outputs/diagnostics/*
+outputs/reports/*
+!outputs/figures/.gitkeep
+!outputs/tables/.gitkeep
+!outputs/data/.gitkeep
+!outputs/diagnostics/.gitkeep
+!outputs/reports/.gitkeep
+
+# Keep data folder and files
+# data/ is tracked in full — no exclusions
+
+# R packages list (not needed for Python project)
+packages_r.txt
+
+# Legacy data folder (renamed to data/)
+00_DATA/

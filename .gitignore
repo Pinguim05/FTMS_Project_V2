@@ -6,7 +6,7 @@ __pycache__/
 *.pyc
 
 # Dados e outputs (locais)
-00_DATA/
+#00_DATA/
 01_OUTPUTS/
 
 # VS Code

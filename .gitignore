@@ -17,6 +17,12 @@ Thumbs.db
 # Jupyter checkpoints
 .ipynb_checkpoints/
 
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.synctex.gz
+
 # Output files — keep folder structure via .gitkeep, ignore generated content
 outputs/figures/*
 outputs/tables/*

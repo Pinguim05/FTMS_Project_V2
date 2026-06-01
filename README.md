@@ -1,113 +1,110 @@
-# FTMS Project V2 — Light Rail Passenger Forecasting
+# FTMS Project V2 - Porto Metro Passenger Forecasting
 
-## Assignment Brief
+## Overview
 
-Produce forecasts for a time series using smoothing, decomposition, and statistical models. Write a report explaining the analysis, covering:
+This repository contains a time series forecasting project for monthly Porto Metro light rail passengers. The project was developed for the Forecasting Methods and Time Series curricular unit and compares smoothing, decomposition, SARIMA, and SARIMAX approaches before producing a final 2026 forecast.
 
-1. Features of the time series.
-2. Smoothing and decomposition methods (estimation results, trend/seasonal/error components, seasonally adjusted data).
-3. SARIMA model development (transformations, differencing, shortlist methodology, ACF/PACF, Ljung-Box, AIC/BIC).
-4. Forecast comparison across methods with test-set metrics and 95% prediction intervals.
-5. Out-of-sample point forecasts and 95% prediction intervals.
-6. Benefits and limitations of the models.
+The current version of the project is centered on:
 
-> Note: Unit root tests (ADF, PP, KPSS) are not appropriate for seasonal data.
-> Apply the Ljung-Box test with the correct degrees of freedom.
+- the analysis notebook: `src/FMTS.ipynb`
+- the written report: `report.md`
+- the LaTeX submission version: `latex-fep/report.tex`
+- the generated figures, tables, diagnostics, and forecast files in `outputs/`
 
-## Dataset
+## Current Project Scope
 
-- **Source:** Metro do Porto — monthly passenger counts (thousands)
-- **File:** `data/light_rail_passengers.xlsx`
-- **Period:** January 2004 – December 2025 (264 monthly observations)
-- **Key features:** strong upward trend (network expansion 2003–2011), stable annual seasonal cycle (peak: September/April; trough: July), COVID-19 structural break (March 2020 – December 2021)
+The final workflow uses:
 
-## Authors
+1. A modelling sample from January 2012 to December 2025.
+2. A chronological split with:
+   - training: 2012-01 to 2024-12
+   - validation: 2025-01 to 2025-12
+   - out-of-sample forecast: 2026-01 to 2026-12
+3. Competing methods:
+   - Seasonal Naive
+   - Holt-Winters variants
+   - STL decomposition plus trend forecasting
+   - SARIMA
+   - SARIMAX with a COVID intervention specification
 
-- Manuel Sampaio
+The notebook first evaluates models on the observed 2025 holdout and only then produces the 2026 forecast.
 
-## Project Structure
+## Main Deliverables
+
+- `src/FMTS.ipynb`: main notebook with data preparation, modelling, diagnostics, evaluation, and forecasts
+- `report.md`: standalone written report
+- `latex-fep/report.tex`: LaTeX report source
+- `latex-fep/report.pdf`: compiled PDF report
+- `outputs/data/`: forecast and validation CSV files
+- `outputs/tables/`: model comparison, decomposition, smoothing, and coefficient tables
+- `outputs/figures/`: plots used in the report
+- `outputs/diagnostics/`: residual diagnostics and Ljung-Box outputs
+
+## Repository Structure
 
 ```text
 FTMS_Project_V2/
-├── data/
-│   └── light_rail_passengers.xlsx       # Raw input data (tracked in full)
-├── src/
-│   └── FMTS_v2.ipynb                    # Main analysis notebook (102 cells)
-├── outputs/                             # Generated files (gitignored — run notebook to populate)
-│   ├── figures/                         # All plots (PNG, 300 DPI)
-│   ├── tables/                          # Metrics, decomposition matrices (CSV + Excel)
-│   ├── data/                            # Forecast tables and prediction intervals (CSV)
-│   ├── diagnostics/                     # SARIMA residual plots and Ljung-Box results
-│   └── reports/                         # Final report (to be added)
-├── tasks.md                             # Project task checklist (priority ordered)
-├── report_structure.md                  # Recommended report outline
-├── log.md                               # Full session changelog
-├── AI.md                                # AI assistant guidelines
-└── environment.yml                      # Conda environment specification
+|-- data/
+|   `-- light_rail_passengers.xlsx
+|-- docs/
+|   `-- notes/
+|-- latex-fep/
+|   |-- report.tex
+|   |-- report.pdf
+|   |-- annex_errors_2025.tex
+|   `-- annex_stl_full.tex
+|-- outputs/
+|   |-- data/
+|   |-- diagnostics/
+|   |-- figures/
+|   |-- reports/
+|   `-- tables/
+|-- src/
+|   |-- FMTS.ipynb
+|   `-- FMTS copy.ipynb
+|-- environment.yml
+|-- professor-review.md
+|-- report.md
+`-- tourism_forecast2_M1_vs_M7.html
 ```
 
-## How to Run
+## Key Outputs
 
-```bash
-# 1. Activate the virtual environment
-.venv\Scripts\activate          # Windows PowerShell
-# source .venv/bin/activate     # macOS/Linux
+The repository currently includes the generated outputs used in the final report, including:
 
-# 2. Launch Jupyter
-jupyter notebook src/FMTS_v2.ipynb
+- `outputs/data/forecast_2025_validation.csv`
+- `outputs/data/forecast_2026.csv`
+- `outputs/data/forecast_2026_intervention.csv`
+- `outputs/data/metrics_2025_validation.csv`
+- `outputs/tables/errors_2025_selected_models.csv`
+- `outputs/tables/sarima_shortlist_aic_bic.csv`
+- `outputs/tables/sarima_best_coefficients.csv`
+- `outputs/tables/stl_components_full_2012_2025.csv`
+- `outputs/figures/validation_2025_plot.png`
+- `outputs/figures/forecast_2026_plot.png`
+- `outputs/diagnostics/residual_ljung_box.csv`
 
-# 3. Run all cells top to bottom (Kernel → Restart & Run All)
+## Current Conclusion
+
+In the current project version, the preferred forecasting model is the selected SARIMA specification evaluated on the 2025 holdout. The report and notebook compare that result against Holt-Winters, decomposition-based forecasting, and intervention-based SARIMAX before producing the 2026 forecast.
+
+## How To Run
+
+### Option 1: Open the notebook
+
+```powershell
+jupyter notebook src/FMTS.ipynb
 ```
 
-All outputs are saved automatically to `outputs/` during the notebook run.
-Output files are gitignored — only folder structure (`.gitkeep`) is tracked.
+Then run the notebook top to bottom.
 
-## Notebook Structure (102 cells)
+### Option 2: Compile the report
 
-| Section | Content |
-| --- | --- |
-| Setup and Data Loading | Imports, path definitions, helper functions, data load |
-| 1. Features of the Time Series | Raw time series plot, structural phases, data description |
-| 2. Exploratory Data Analysis | Resampling, ACF/PACF of raw series, COVID break |
-| 3.1. Decomposition | Additive, multiplicative, STL-LOESS across 4 phases |
-| 3.2. Smoothing Methods | Moving averages (MA, 2×12, 2×4, 3×3), SES, Holt, Holt-Winters |
-| 3.2B. SARIMA Identification | Log transform, differencing, ACF/PACF, shortlist |
-| Walk-Forward Forecast Loop | Expanding-window forecasts 2019–2021, all models |
-| Ensemble Forecast | Inverse-MAPE weighted combination with justification |
-| COVID Downweighting | Hyndman (2020) downweighting strategy |
-| 4. SARIMA | AIC/BIC shortlist, Ljung-Box (corrected df), residual diagnostics |
-| 5. Walk-Forward Validation | Methodology, per-year metrics table (2019–2025) |
-| Save All Outputs | Comprehensive export cell |
-| 6. Benefits and Limitations | Per-model analysis, data limitations |
-| OOS Forecast (SARIMA) | 12-month forecast + 95% PI |
-| OOS Forecast (Smoothing) | Holt-Winters + Holt with simulation intervals |
-| 7. Extended Models | ARIMAX, Bootstrap ensemble PI, Gradient Boosting ML |
-| 8. Conclusions | Best model, real MAPE numbers, limitations, future work |
-| Output File Index | Complete reference table of all generated files |
+Open `latex-fep/report.tex` in MiKTeX or TeXworks and compile with `pdfLaTeX` twice.
 
-## Key Results
+## Notes
 
-| Model | Aggregate MAPE (2019–2025) | 2022–2025 avg MAPE |
-| --- | --- | --- |
-| SARIMA(0,1,1)(0,1,1)₁₂ | 29.18% | 8.90% |
-| Ensemble (inverse-MAPE) | 29.31% | 10.67% |
-| Gradient Boosting (ML) | 28.90% | 13.10% |
-| Holt-Winters | 31.16% | 13.41% |
-| ARIMAX (COVID dummy) | 51.69% | 28.84% |
-
-All models fail in 2020 (MAPE > 110%) due to the COVID structural break.
-
-## Key Output Files
-
-| File | Description |
-| --- | --- |
-| `outputs/figures/out_of_sample_forecast.png` | 12-month SARIMA OOS forecast + 95% PI |
-| `outputs/figures/extended_models_comparison.png` | ARIMAX, GBM, ensemble OOS comparison |
-| `outputs/data/forecast_out_of_sample.csv` | SARIMA point forecast + 95% PI |
-| `outputs/data/forecast_oos_arimax.csv` | ARIMAX OOS forecast + 95% PI |
-| `outputs/data/forecast_oos_gbm.csv` | Gradient boosting recursive OOS forecast |
-| `outputs/data/forecast_ensemble_bootstrap.csv` | Ensemble + bootstrap 95% PI |
-| `outputs/data/metrics_walkforward.csv` | Per-year walk-forward metrics, all models |
-| `outputs/tables/metrics_sarima_aic_bic.csv` | SARIMA AIC/BIC shortlist |
-| `outputs/diagnostics/sarima_diagnostics.csv` | Ljung-Box and residual diagnostics |
-| `outputs/diagnostics/gbm_feature_importance.csv` | GBM permutation feature importance |
+- `src/FMTS.ipynb` is the active notebook.
+- `src/FMTS copy.ipynb` is a backup copy and not the main deliverable.
+- `docs/notes/` contains supporting project notes and process documents.
+- The repository includes generated outputs because the report depends on them directly.

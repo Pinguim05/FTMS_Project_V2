@@ -251,7 +251,7 @@ sigma2 & 0.00210 & 0.00018 & 11.849 & $<$0.001 & [0.00175,\,0.00245] \\
 The first two autoregressive terms are strongly significant and capture short-run persistence. The seasonal MA term is also strongly significant, which is consistent with the remaining seasonal correlation structure after differencing. The third AR term is not individually significant at conventional levels, but the model was retained because, as a complete specification, it performed best on the 2025 holdout and best on AICc among the shortlisted SARIMA candidates.
 
 \subsection{SARIMAX with a COVID Intervention Dummy}
-As a robustness check, a \texttt{SARIMAX(2,1,0)(0,1,1,12)} model was also estimated with an intervention dummy equal to 1 from March 2020 to December 2022 and 0 otherwise. This keeps the original disrupted observations and models the COVID period explicitly instead of replacing the affected window with counterfactual values.
+As a robustness check, a \texttt{SARIMAX(3,1,0)(0,1,1,12)} model was also estimated with an intervention dummy equal to 1 from March 2020 to December 2022 and 0 otherwise. Dummy (binary) variables Indicator variables (0 or 1) used to isolate anomalous events or structural shifts. A step indicator running in the above window can effectively model the structural demand shock induced by the COVID-19 pandemic, preventing the unusual variance from biasing the model's core autoregressive parameters.
 
 The intervention model is competitive but not superior. On the 2025 holdout it records MAPE 4.11\%, MAE 324.39, RMSE 395.42, and MASE 0.671. It therefore improves on the naive benchmark and on STL\,+\,Holt, but it is less accurate than the selected SARIMA and weaker than both Holt-Winters additive and multiplicative on MAPE. In this dataset, smoothing the disruption into a coherent training signal appears to restore the seasonal and trend structure more effectively than a single intervention dummy.
 
@@ -390,7 +390,7 @@ The main caution is that SARIMA residuals still fail white-noise diagnostics, so
 \includegraphics[width=\textwidth,height=0.31\textheight,keepaspectratio]{../outputs/figures/residuals_SARIMAX_Intervention.png}
 \end{minipage}
 \vspace{0.3em}
-\captionof{figure}{Residual diagnostics for the selected \texttt{SARIMA(3,1,0)(0,1,1,12)} model (left) and the intervention-based \texttt{SARIMAX(2,1,0)(0,1,1,12)} model (right).}
+\captionof{figure}{Residual diagnostics for the selected \texttt{SARIMA(3,1,0)(0,1,1,12)} model (left) and the intervention-based \texttt{SARIMAX(3,1,0)(0,1,1,12)} model (right).}
 \label{fig:resid_compare}
 \end{center}
 
